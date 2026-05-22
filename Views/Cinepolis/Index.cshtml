@@ -1,0 +1,142 @@
+﻿@model IDGS904ASP.Models.Cinepolis
+
+<style>
+
+    body {
+        background-color: #0d47a1;
+        font-family: Arial;
+        color: white;
+    }
+
+    .contenedor {
+        width: 800px;
+        margin: auto;
+        margin-top: 40px;
+        position: relative;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 40px;
+    }
+
+    .entradas {
+        border: 2px solid white;
+        width: 350px;
+        padding: 20px;
+    }
+
+    .salidas {
+        border: 2px solid white;
+        width: 250px;
+        padding: 20px;
+        position: absolute;
+        top: 120px;
+        right: 0;
+    }
+
+    .acciones {
+        border: 2px solid white;
+        width: 250px;
+        padding: 20px;
+        margin: auto;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    input[type=text],
+    input[type=number] {
+        width: 180px;
+        height: 25px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+        button:hover {
+            background-color: gold;
+        }
+
+    .resultado {
+        background: white;
+        color: black;
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="contenedor">
+
+    <h1>Cinépolis</h1>
+
+    <div class="entradas">
+
+        <h2>Entradas</h2>
+
+        <form method="post">
+
+            <p>
+                Nombre:
+                <input type="text" name="Nombre" value="@Model?.Nombre" />
+            </p>
+
+            <p>
+                Cantidad Compradores:
+                <input type="number" name="Compradores" value="@Model?.Compradores" />
+            </p>
+
+            <p>
+                Tarjeta Cineco:
+
+                <input type="radio" name="Cineco" value="true" /> Sí
+                <input type="radio" name="Cineco" value="false" /> No
+            </p>
+
+            <p>
+                Cantidad Boletos:
+                <input type="number" name="Boletos" value="@Model?.Boletos" />
+            </p>
+
+            <div class="acciones">
+
+                <button type="submit">
+                    Procesar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="salidas">
+
+        <h2>Salidas</h2>
+
+        @if (Model != null)
+        {
+            if (Model.Total == -1)
+            {
+                <div class="resultado">
+                    No puedes comprar más de 7 boletos por persona
+                </div>
+            }
+            else if (Model.Total > 0)
+            {
+                <div class="resultado">
+                    Valor a Pagar: $@Model.Total
+                </div>
+            }
+        }
+
+    </div>
+
+</div>
